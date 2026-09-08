@@ -1,0 +1,38 @@
+{
+  "name": "Prüfungsbundle · RBH",
+  "short_name": "Prüfungsbundle RBH",
+  "description": "Original IHK-Prüfungen mit Rechenweg und Auswertung – Geprüfte Industriemeister (IHK)",
+  "start_url": "/pruefungsbundlerbh/index.html",
+  "scope": "/pruefungsbundlerbh/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a1a24",
+  "theme_color": "#E82020",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "/pruefungsbundlerbh/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pruefungsbundlerbh/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pruefungsbundlerbh/icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/pruefungsbundlerbh/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
