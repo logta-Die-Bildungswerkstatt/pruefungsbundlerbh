@@ -6320,7 +6320,7 @@ function showGesetzesfinder(fach) {
   const fachNameGf = (window.fachData && window.fachData[fach]) ? window.fachData[fach].name : fach.toUpperCase();
   document.getElementById('inhalt-breadcrumb').textContent = fachNameGf + ' › Gesetzesfinder';
   document.getElementById('inhalt-title').textContent = '🔍 Gesetzesfinder — Fallaufgaben lösen';
-  document.getElementById('inhalt-sub').textContent = gfData.gesetze.length + ' Gesetze & Vorschriften · Stichwort eingeben';
+  document.getElementById('inhalt-sub').textContent = gfData.gesetze.length + ' Gesetze & Vorschriften \u2014 in eigenen Worten erkl\u00e4rt \u00b7 Stichwort eingeben';
   const staticBannerGf = document.querySelector('#page-inhalt-detail .inhalt-detail-banner');
   if (staticBannerGf) staticBannerGf.style.background = 'linear-gradient(135deg,#1e3a5f,#1d4ed8)';
   // Zurück-Button: Standardziel ist die Startseite (kein "Fach-Übersicht"-Seite im
@@ -6334,6 +6334,39 @@ function showGesetzesfinder(fach) {
   const card = document.createElement('div');
   card.className = 'inhalt-content-card';
   card.style.cssText = 'padding:20px;';
+
+  // ===== QUELLENNACHWEIS =====
+  // Pflichtangabe: Die App gibt Gesetze in eigenen Worten wieder. Der Verweis
+  // auf die amtliche Fundstelle muss sichtbar sein (Play-Richtlinie zu
+  // irrefuehrenden Behauptungen).
+  const quelleBox = document.createElement('div');
+  quelleBox.style.cssText = 'border:1.5px solid #bfdbfe;background:#eff6ff;border-radius:12px;'
+    + 'padding:14px 16px;margin-bottom:18px;font-size:12.5px;line-height:1.6;color:#1e3a5f;';
+  quelleBox.innerHTML = `
+    <div style="font-weight:700;margin-bottom:6px;">\u{1F4DA} Quellen und Hinweise</div>
+    <p style="margin:0 0 8px;">
+      Dieser Gesetzesfinder enth\u00e4lt <strong>keine Gesetzestexte im Wortlaut</strong>.
+      Er fasst in eigenen Worten zusammen, welches Gesetz f\u00fcr welche Fragestellung
+      einschl\u00e4gig ist \u2014 als Orientierungshilfe f\u00fcr die Pr\u00fcfungsvorbereitung.
+    </p>
+    <p style="margin:0 0 8px;">
+      Die amtlichen Fassungen des Bundesrechts ver\u00f6ffentlichen das Bundesministerium
+      der Justiz und das Bundesamt f\u00fcr Justiz unter:<br>
+      <a href="https://www.gesetze-im-internet.de" target="_blank" rel="noopener noreferrer"
+         style="color:#1d4ed8;font-weight:700;word-break:break-all;">https://www.gesetze-im-internet.de</a>
+    </p>
+    <p style="margin:0 0 8px;">
+      Die Datenschutz-Grundverordnung (DSGVO) ist EU-Recht und wird von der
+      Europ\u00e4ischen Union ver\u00f6ffentlicht.
+    </p>
+    <p style="margin:0;color:#475569;">
+      Diese App ist ein unabh\u00e4ngiges Lernangebot der LogTa \u2013 Die Bildungswerkstatt.
+      Sie ist <strong>kein Angebot einer Beh\u00f6rde, der IHK oder einer sonstigen
+      staatlichen Stelle</strong> und ersetzt keine Rechtsberatung.
+      Ma\u00dfgeblich ist immer der amtliche Gesetzestext.
+    </p>
+  `;
+  card.appendChild(quelleBox);
 
   const searchWrap = document.createElement('div');
   searchWrap.style.cssText = 'margin-bottom:20px;';
@@ -6401,7 +6434,12 @@ function renderGfResults(gesetze) {
           ${g.stichwörter.slice(0,3).map(s => `<span style="background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;">${s}</span>`).join('')}
         </div>
       </div>
-      <p style="margin:0;color:#374151;font-size:13px;line-height:1.5;">${g.beschreibung}</p>
+      <p style="margin:0 0 8px;color:#374151;font-size:13px;line-height:1.5;">${g.beschreibung}</p>
+      <p style="margin:0;font-size:11px;color:#6b7280;">
+        Zusammenfassung in eigenen Worten \u00b7 amtlicher Text:
+        <a href="https://www.gesetze-im-internet.de" target="_blank" rel="noopener noreferrer"
+           style="color:#1d4ed8;font-weight:600;">gesetze-im-internet.de</a>
+      </p>
     </div>
   `).join('');
 }
@@ -6465,6 +6503,8 @@ function druckeGesetzesfinder() {
     '.kopf-titel{font-size:18px;font-weight:700;color:#1d4ed8;margin:0 0 3px;}',
     '.kopf-meta{font-size:11px;color:#6b7280;}',
     '.kopf-datum{font-size:11px;color:#9ca3af;text-align:right;}',
+    '.quellen{border:1px solid #bfdbfe;background:#eff6ff;border-radius:6px;padding:10px 12px;'
+      + 'margin-top:14px;font-size:10.5px;line-height:1.5;color:#1e3a5f;page-break-inside:avoid;}',
     '.eintrag{border:1px solid #e5e7eb;border-left:4px solid #1d4ed8;border-radius:6px;padding:12px 14px;margin-bottom:10px;page-break-inside:avoid;background:#fff;}',
     '.eintrag-header{margin-bottom:8px;}',
     '.eintrag-links{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}',
@@ -6492,6 +6532,16 @@ function druckeGesetzesfinder() {
     + '<div class=kopf-datum>Gedruckt am ' + datum + '</div>'
     + '</div>'
     + zeilen
+    + '<div class=quellen>'
+    + '<strong>Quellen und Hinweise</strong><br>'
+    + 'Dieser Gesetzesfinder enth\u00e4lt keine Gesetzestexte im Wortlaut, sondern '
+    + 'Zusammenfassungen in eigenen Worten. Die amtlichen Fassungen des Bundesrechts '
+    + 'ver\u00f6ffentlichen das Bundesministerium der Justiz und das Bundesamt f\u00fcr Justiz '
+    + 'unter https://www.gesetze-im-internet.de \u2014 die DSGVO als EU-Recht die Europ\u00e4ische Union. '
+    + 'Diese App ist ein unabh\u00e4ngiges Lernangebot der LogTa \u2013 Die Bildungswerkstatt und kein '
+    + 'Angebot einer Beh\u00f6rde, der IHK oder einer sonstigen staatlichen Stelle. '
+    + 'Ma\u00dfgeblich ist immer der amtliche Gesetzestext.'
+    + '</div>'
     + '<div class=fusszeile><span>LogTa LernApp — Industriemeister BQ</span><span>logta.de</span></div>'
     + '</div>'
     + '<script>window.onload=function(){window.print();}<\/script>'
