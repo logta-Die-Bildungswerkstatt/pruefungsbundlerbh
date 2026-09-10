@@ -1702,7 +1702,9 @@
     line-height: 1.6; font-style: italic;
   }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+  <!-- Lucide-CDN entfernt: die App nutzt ausschliesslich die eigenen Inline-SVGs
+       in window.lucideIcons. Ein externes Skript wuerde bei jedem Start einen
+       Fremdserver kontaktieren und den Offline-Betrieb brechen. -->
 <link rel="manifest" href="/pruefungsbundlerbh/manifest.json">
 <meta name="theme-color" content="#E82020">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1939,12 +1941,12 @@
         <div class="banner-text">
           <div class="banner-greeting">📝 IHK Vorbereitung</div>
           <div class="pruef-banner-title">Prüfungsvorbereitung</div>
-          <div class="pruef-banner-sub">Wähle einen echten IHK-Prüfungsjahrgang und übe die abgeleiteten Aufgaben.</div>
+          <div class="pruef-banner-sub">Wähle einen IHK-Prüfungsjahrgang und übe die daraus abgeleiteten Aufgaben — eigenständig ausformuliert, nicht der Originalwortlaut.</div>
         </div>
         <div class="banner-illustration">🏆</div>
       </div>
 
-      <div class="section-title" style="margin-top:16px;">📋 Echte IHK-Prüfungsjahrgänge</div>
+      <div class="section-title" style="margin-top:16px;">📋 IHK-Prüfungsjahrgänge — abgeleitete Aufgaben</div>
       <div style="padding:0 16px 20px;">
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" id="ps-jahrgaenge-grid"></div>
       </div>
@@ -10384,7 +10386,7 @@ function opRenderAuswertung() {
     '</div>';
   }).join('');
 
-  container.innerHTML = '<div style="font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#94a3b8;margin-bottom:4px;">Echte IHK-Prüfungsjahrgänge</div>' +
+  container.innerHTML = '<div style="font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#94a3b8;margin-bottom:4px;">IHK-Prüfungsjahrgänge · abgeleitete Aufgaben</div>' +
     '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">' + karten + '</div>';
 }
 
@@ -11699,7 +11701,7 @@ const AUFGABEN_H2024 = [
 let AUFGABEN = AUFGABEN_H2025;
 
 // ============================================================
-// FORMELSAMMLUNG BQ -- transkribiert aus der echten, physischen IHK-Formelsammlung
+// FORMELSAMMLUNG BQ -- gegliedert nach dem Aufbau der IHK-Formelsammlung
 // für industriell-technische Fortbildungsabschlüsse (vom Nutzer fotografiert,
 // mit der er selbst für seinen Meister gelernt hat). Dient als Nachschlagewerk
 // UND als Referenzquelle, gegen die die Prüfungsaufgaben-Formeln geprüft werden.
@@ -16141,7 +16143,7 @@ function ps2RenderStatistikSeite(){
 
   c.innerHTML = `
     <div style="background:#eff6ff;border:1px solid #dbeafe;border-radius:14px;padding:14px 16px;margin-bottom:18px;font-size:12px;color:#1e40af;line-height:1.65;">
-      Diese Übersicht zeigt dir, welche Themen in den bisherigen IHK-Prüfungen am häufigsten drankamen. So siehst du auf einen Blick, wo sich Lernen am meisten lohnt — was in der Vergangenheit oft geprüft wurde, taucht erfahrungsgemäß auch in kommenden Prüfungen wieder auf. <b>Die Auswertung basiert auf allen 9 echten IHK-Prüfungsjahrgängen (Frühjahr/Herbst 2021–2025).</b>
+      Diese Übersicht zeigt dir, welche Themen in den bisherigen IHK-Prüfungen am häufigsten drankamen. So siehst du auf einen Blick, wo sich Lernen am meisten lohnt — was in der Vergangenheit oft geprüft wurde, taucht erfahrungsgemäß auch in kommenden Prüfungen wieder auf. <b>Ausgewertet sind die Themen aus 9 IHK-Prüfungsjahrgängen (Frühjahr/Herbst 2021–2025).</b>
     </div>
     ${rangHtml}
   `;
